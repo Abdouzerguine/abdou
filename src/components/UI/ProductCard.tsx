@@ -7,9 +7,10 @@ import { useCart } from '../../contexts/CartContext';
 
 interface ProductCardProps {
   product: Product;
+  store?: Store;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, store }) => {
   const freeShippingText = useTranslation('free_shipping');
   // priceText removed, not used
   const { addToCart } = useCart();
@@ -22,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.stopPropagation();
     
     setIsAdding(true);
-    addToCart(product, undefined, 1); // store is now undefined for single store
+    addToCart(product, store, 1);
     
     // Brief animation delay
     setTimeout(() => {
@@ -79,7 +80,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-teal-600 dark:text-teal-400 font-medium">Tiny Treasure Online Store</span>
+          <span className="text-sm text-teal-600 dark:text-teal-400 font-medium">
+            {store?.name || 'Tiny Treasure'}
+          </span>
           <span className="text-xs text-gray-500 dark:text-gray-400">{product.category}</span>
         </div>
 

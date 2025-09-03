@@ -38,7 +38,7 @@ const PlatformAdmin: React.FC = () => {
     addProduct, 
     updateProduct, 
     deleteProduct,
-    generateStorePassword 
+    generateStorePassword
   } = useApp();
   
   const [activeTab, setActiveTab] = useState('overview');

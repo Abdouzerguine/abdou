@@ -156,10 +156,10 @@ const Home: React.FC = () => {
               </div>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-md">
-              Tiny Treasure — Online store for Algeria
+              Your Premier Online Store
             </h1>
             <p className="text-lg md:text-2xl mb-8 text-gray-100 max-w-3xl mx-auto">
-              Shop quality local products organized by category — fast delivery across all 58 wilayas.
+              Discover amazing products across all categories with fast delivery to every corner of Algeria
             </p>
             
             {/* Hero Search with Water Effect */}
@@ -178,11 +178,15 @@ const Home: React.FC = () => {
 
             {/* Stats with 3D Cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl border border-white/20">
+              <div className="bg-white/15 backdrop-blur-xl rounded-2xl p-8 transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl border border-white/30 shadow-xl">
                 <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">{products.length}+</div>
                 <div className="text-gray-100">{getTranslatedText('products_available')}</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl border border-white/20">
+              <div className="bg-white/15 backdrop-blur-xl rounded-2xl p-8 transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl border border-white/30 shadow-xl">
+                <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-green-200 bg-clip-text text-transparent">1</div>
+                <div className="text-gray-100">Trusted Store</div>
+              </div>
+              <div className="bg-white/15 backdrop-blur-xl rounded-2xl p-8 transform transition-all duration-500 hover:scale-110 hover:rotate-1 hover:shadow-2xl border border-white/30 shadow-xl">
                 <div className="text-4xl font-bold mb-2 bg-gradient-to-r from-white to-purple-200 bg-clip-text text-transparent">58</div>
                 <div className="text-gray-100">{getTranslatedText('wilayas_covered')}</div>
               </div>
@@ -205,10 +209,10 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 transform transition-all duration-500 hover:scale-105">
-              {getTranslatedText('why_choose')}
+              Why Shop With Us?
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 transform transition-all duration-500 hover:scale-105">
-              {getTranslatedText('connecting_algeria')}
+              Experience the best online shopping with quality products and exceptional service
             </p>
           </div>
           
@@ -218,7 +222,7 @@ const Home: React.FC = () => {
                 <Users className="h-10 w-10 text-teal-600 dark:text-teal-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{getTranslatedText('local_businesses')}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{getTranslatedText('supporting_entrepreneurs')}</p>
+              <p className="text-gray-600 dark:text-gray-400">Carefully curated products from trusted suppliers</p>
             </div>
             
             <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 rounded-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm">
@@ -226,7 +230,7 @@ const Home: React.FC = () => {
                 <Truck className="h-10 w-10 text-yellow-600 dark:text-yellow-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{getTranslatedText('nationwide_delivery')}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{getTranslatedText('shipping_all_wilayas')}</p>
+              <p className="text-gray-600 dark:text-gray-400">Fast and reliable delivery to all 58 wilayas with transparent pricing</p>
             </div>
             
             <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 rounded-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm">
@@ -234,7 +238,7 @@ const Home: React.FC = () => {
                 <Shield className="h-10 w-10 text-orange-600 dark:text-orange-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{getTranslatedText('secure_shopping')}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{getTranslatedText('protected_transactions')}</p>
+              <p className="text-gray-600 dark:text-gray-400">Safe transactions with cash on delivery and buyer protection</p>
             </div>
             
             <div className="text-center p-8 group hover:bg-white/50 dark:hover:bg-gray-700/50 rounded-2xl transition-all duration-500 transform hover:scale-110 hover:-translate-y-2 hover:shadow-2xl backdrop-blur-sm">
@@ -242,7 +246,7 @@ const Home: React.FC = () => {
                 <Star className="h-10 w-10 text-green-600 dark:text-green-400" />
               </div>
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">{getTranslatedText('quality_products')}</h3>
-              <p className="text-gray-600 dark:text-gray-400">{getTranslatedText('curated_selection')}</p>
+              <p className="text-gray-600 dark:text-gray-400">Premium quality products with detailed descriptions and reviews</p>
             </div>
           </div>
         </div>
@@ -253,23 +257,24 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-6 transform transition-all duration-500 hover:scale-105">
-              {getTranslatedText('shop_by_category')}
+              Shop by Category
             </h2>
             <p className="text-xl text-gray-600 dark:text-gray-400 transform transition-all duration-500 hover:scale-105">
-              {getTranslatedText('find_exactly')}
+              Find exactly what you're looking for in our organized categories
             </p>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
             {categories.map((category, index) => (
               <Link
-                key={category.id}
-                to={`/category/${category.name.toLowerCase()}`}
+              <div className="flex justify-center mb-8">
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 mx-auto transform transition-all duration-500 hover:scale-110 hover:rotate-3">
                 className="group p-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl hover:bg-teal-50/80 dark:hover:bg-teal-900/30 transition-all duration-500 text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-4 hover:scale-110 hover:rotate-1 border border-white/20 dark:border-gray-700/20"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-teal-100 to-teal-200 dark:from-teal-800 dark:to-teal-700 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gradient-to-br group-hover:from-teal-200 group-hover:to-teal-300 dark:group-hover:from-teal-700 dark:group-hover:to-teal-600 transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 shadow-lg">
+                    className="w-full h-full object-contain drop-shadow-2xl rounded-3xl bg-white/90 backdrop-blur-sm p-4 border-4 border-white/50 shadow-2xl"
                   <span className="text-teal-600 dark:text-teal-400 text-3xl transform transition-all duration-300 group-hover:scale-110">{category.icon}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-teal-400/20 to-blue-400/20 rounded-3xl blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
                 <h3 className="font-medium text-gray-900 dark:text-white group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors duration-300 transform group-hover:scale-105">
                   {category.name}
@@ -285,8 +290,11 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-4xl font-bold text-gray-900 dark:text-white transform transition-all duration-500 hover:scale-105">
-              {featuredProductsText}
+              Featured Products
             </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 mt-4 transform transition-all duration-500 hover:scale-105">
+              Discover our handpicked selection of premium products
+            </p>
             <Link 
               to="/categories" 
               className="text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transform transition-all duration-300 hover:scale-110 hover:translate-x-2"

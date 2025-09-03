@@ -295,7 +295,7 @@ const Categories: React.FC = () => {
                   return store ? (
                     <ProductCard 
                       key={product.id} 
-                      product={product} 
+                      product={product}
                       store={store}
                     />
                   ) : null;

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Store, Product, User, PlatformSettings, ShippingZone, Analytics, Order } from '../types';
 import { stores as initialStores, products as initialProducts, platformSettings as initialSettings, shippingZones as initialZones } from '../data/mockData';
-import { loadProducts, saveProducts } from '../utils/productDb';
+import { loadProducts, saveProducts, loadStores, saveStores } from '../utils/productDb';
 import { useCommission } from './CommissionContext';
 
 interface AppContextType {
@@ -13,6 +13,8 @@ interface AppContextType {
   shippingZones: ShippingZone[];
   analytics: Analytics;
   // addStore and updateStore removed for single store setup
+  addStore: (store: Store) => void;
+  updateStore: (id: string, updates: Partial<Store>) => void;
   deleteStore: (id: string) => void;
   addProduct: (product: Product) => void;
   updateProduct: (id: string, updates: Partial<Product>) => void;
@@ -30,7 +32,8 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [stores, setStores] = useState<Store[]>(initialStores);
+  const persistedStores = loadStores();
+  const [stores, setStores] = useState<Store[]>(persistedStores || initialStores);
   const persisted = loadProducts();
   const [products, setProducts] = useState<Product[]>(persisted || initialProducts);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -57,9 +60,30 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   // Removed addStore and updateStore, single store only
+  const addStore = (store: Store) => {
+    setStores(prev => {
+      const next = [...prev, store];
+      saveStores(next);
+      return next;
+    });
+  };
+
+  const updateStore = (id: string, updates: Partial<Store>) => {
+    setStores(prev => {
+      const next = prev.map(store => 
+        store.id === id ? { ...store, ...updates } : store
+      );
+      saveStores(next);
+      return next;
+    });
+  };
 
   const deleteStore = (id: string) => {
-    setStores(prev => prev.filter(store => store.id !== id));
+    setStores(prev => {
+      const next = prev.filter(store => store.id !== id);
+      saveStores(next);
+      return next;
+    });
     setProducts(prev => prev.filter(product => product.storeId !== id));
   };
 
@@ -165,7 +189,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       platformSettings,
       shippingZones,
       analytics,
-  // addStore and updateStore removed for single store setup
+      addStore,
+      updateStore,
       deleteStore,
       addProduct,
       updateProduct,
