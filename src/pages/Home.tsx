@@ -130,6 +130,21 @@ const Home: React.FC = () => {
         en: 'Subscribe',
         ar: 'اشتراك',
         fr: 'S\'abonner'
+      },
+      'founded_date': {
+        en: 'Founded',
+        ar: 'تاريخ التأسيس',
+        fr: 'Date de Fondation'
+      },
+      'customer_satisfaction': {
+        en: 'Customer Satisfaction',
+        ar: 'رضا العملاء',
+        fr: 'Satisfaction Client'
+      },
+      'customer_support_24': {
+        en: 'Customer Support',
+        ar: 'دعم العملاء',
+        fr: 'Support Client'
       }
     };
     return translations[key]?.[currentLanguage] || key;

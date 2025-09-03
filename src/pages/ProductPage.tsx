@@ -351,7 +351,7 @@ const ProductPage: React.FC = () => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Share Product</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{getTranslatedText('share_product')}</h3>
                 <button
                   onClick={() => setShowShareModal(false)}
                   className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
@@ -366,7 +366,7 @@ const ProductPage: React.FC = () => {
                   className="w-full flex items-center space-x-3 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <Facebook className="h-5 w-5" />
-                  <span>Share on Facebook</span>
+                  <span>{getTranslatedText('share_facebook')}</span>
                 </button>
                 
                 <button
@@ -374,19 +374,19 @@ const ProductPage: React.FC = () => {
                   className="w-full flex items-center space-x-3 p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors"
                 >
                   <Instagram className="h-5 w-5" />
-                  <span>Copy for Instagram</span>
+                  <span>{getTranslatedText('copy_instagram')}</span>
                 </button>
                 
                 <button
                   onClick={() => {
                     const text = `Check out this amazing product: ${product.name} - Only ${product.price.toLocaleString()} DA at Tiny Treasure! ${window.location.href}`;
                     navigator.clipboard.writeText(text);
-                    alert('Product info copied for TikTok! You can now paste it in your TikTok video description.');
+                    alert(getTranslatedText('tiktok_copied'));
                   }}
                   className="w-full flex items-center space-x-3 p-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                 >
                   <TikTokIcon />
-                  <span>Copy for TikTok</span>
+                  <span>{getTranslatedText('copy_tiktok')}</span>
                 </button>
                 
                 <button
@@ -394,19 +394,19 @@ const ProductPage: React.FC = () => {
                   className="w-full flex items-center space-x-3 p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   <Share2 className="h-5 w-5" />
-                  <span>Share on WhatsApp</span>
+                  <span>{getTranslatedText('share_whatsapp')}</span>
                 </button>
                 
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(window.location.href);
-                    alert('Product link copied to clipboard!');
+                    alert(getTranslatedText('link_copied'));
                     setShowShareModal(false);
                   }}
                   className="w-full flex items-center space-x-3 p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 >
                   <ExternalLink className="h-5 w-5" />
-                  <span>Copy Link</span>
+                  <span>{getTranslatedText('copy_link')}</span>
                 </button>
               </div>
             </div>

@@ -128,7 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, store }) => {
             to={`/product/${product.id}`}
             className="flex-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors text-center text-sm font-medium"
           >
-            View Details
+            {useTranslation('view_details')}
           </Link>
           <button
             onClick={handleAddToCart}
@@ -146,7 +146,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, store }) => {
             ) : (
               <>
                 <ShoppingCart className="h-4 w-4" />
-                <span>{product.stockLevel === 0 ? 'Out of Stock' : 'Add'}</span>
+                <span>{product.stockLevel === 0 ? useTranslation('out_of_stock') : useTranslation('add')}</span>
               </>
             )}
           </button>

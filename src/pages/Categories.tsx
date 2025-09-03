@@ -109,6 +109,11 @@ const Categories: React.FC = () => {
         en: 'Clear all filters',
         ar: 'مسح جميع المرشحات',
         fr: 'Effacer tous les filtres'
+      },
+      'try_adjusting_search': {
+        en: 'Try adjusting your search criteria or browse our categories',
+        ar: 'حاول تعديل معايير البحث أو تصفح فئاتنا',
+        fr: 'Essayez d\'ajuster vos critères de recherche ou parcourez nos catégories'
       }
     };
     return translations[key]?.[currentLanguage] || key;

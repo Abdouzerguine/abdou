@@ -297,22 +297,22 @@ const AddProduct: React.FC = () => {
                           }}
                         />
                       </div>
-                    )}
-                  </div>
+                  <h4 className="font-medium text-gray-900 dark:text-white mb-3">{getTranslatedText('quick_zone_setup')}</h4>
+                      {getTranslatedText('east')}: 600 DA
                   {productImages.length > 1 && (
                     <button
                       type="button"
                       onClick={() => removeImageField(index)}
                       className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200 transform hover:scale-110"
                     >
-                      <X className="h-5 w-5" />
+                      {getTranslatedText('west')}: 700 DA
                     </button>
                   )}
                 </div>
               ))}
               <button
                 type="button"
-                onClick={addImageField}
+                      {getTranslatedText('south')}: 1200 DA
                 className="flex items-center space-x-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
               >
                 <Plus className="h-4 w-4" />
@@ -414,33 +414,33 @@ const AddProduct: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">SEO Title</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{getTranslatedText('seo_title')}</label>
               <input
                 type="text"
                 value={productForm.seoTitle}
                 onChange={(e) => setProductForm({...productForm, seoTitle: e.target.value})}
-                placeholder="SEO optimized title"
+                placeholder={getTranslatedText('seo_optimized_title')}
                 className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tags (comma separated)</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{getTranslatedText('tags_comma')}</label>
               <input
                 type="text"
                 value={productForm.tags}
                 onChange={(e) => setProductForm({...productForm, tags: e.target.value})}
-                placeholder="tag1, tag2, tag3"
+                placeholder={getTranslatedText('tags_placeholder')}
                 className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">SEO Description</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{getTranslatedText('seo_description')}</label>
             <textarea
               value={productForm.seoDescription}
               onChange={(e) => setProductForm({...productForm, seoDescription: e.target.value})}
-              placeholder="SEO meta description"
+              placeholder={getTranslatedText('seo_meta_description')}
               className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
               rows={2}
             />

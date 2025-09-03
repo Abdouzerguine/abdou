@@ -162,6 +162,61 @@ const translations = {
     en: 'Store Admin',
     ar: 'إدارة المتجر',
     fr: 'Admin Magasin'
+  },
+  'view_details': {
+    en: 'View Details',
+    ar: 'عرض التفاصيل',
+    fr: 'Voir Détails'
+  },
+  'out_of_stock': {
+    en: 'Out of Stock',
+    ar: 'غير متوفر',
+    fr: 'Rupture de Stock'
+  },
+  'add': {
+    en: 'Add',
+    ar: 'إضافة',
+    fr: 'Ajouter'
+  },
+  'share_product': {
+    en: 'Share Product',
+    ar: 'مشاركة المنتج',
+    fr: 'Partager le Produit'
+  },
+  'share_facebook': {
+    en: 'Share on Facebook',
+    ar: 'مشاركة على فيسبوك',
+    fr: 'Partager sur Facebook'
+  },
+  'copy_instagram': {
+    en: 'Copy for Instagram',
+    ar: 'نسخ لإنستغرام',
+    fr: 'Copier pour Instagram'
+  },
+  'copy_tiktok': {
+    en: 'Copy for TikTok',
+    ar: 'نسخ لتيك توك',
+    fr: 'Copier pour TikTok'
+  },
+  'share_whatsapp': {
+    en: 'Share on WhatsApp',
+    ar: 'مشاركة على واتساب',
+    fr: 'Partager sur WhatsApp'
+  },
+  'copy_link': {
+    en: 'Copy Link',
+    ar: 'نسخ الرابط',
+    fr: 'Copier le Lien'
+  },
+  'link_copied': {
+    en: 'Product link copied to clipboard!',
+    ar: 'تم نسخ رابط المنتج!',
+    fr: 'Lien du produit copié!'
+  },
+  'tiktok_copied': {
+    en: 'Product info copied for TikTok! You can now paste it in your TikTok video description.',
+    ar: 'تم نسخ معلومات المنتج لتيك توك! يمكنك الآن لصقها في وصف الفيديو.',
+    fr: 'Informations du produit copiées pour TikTok! Vous pouvez maintenant les coller dans la description de votre vidéo.'
   }
 };
 

@@ -90,6 +90,126 @@ const Checkout: React.FC = () => {
         en: "Don't forget to follow us!",
         ar: 'لا تنسى متابعتنا!',
         fr: 'N\'oubliez pas de nous suivre!'
+      },
+      'first_name': {
+        en: 'First Name',
+        ar: 'الاسم الأول',
+        fr: 'Prénom'
+      },
+      'last_name': {
+        en: 'Last Name',
+        ar: 'اسم العائلة',
+        fr: 'Nom de Famille'
+      },
+      'email': {
+        en: 'Email',
+        ar: 'البريد الإلكتروني',
+        fr: 'Email'
+      },
+      'phone': {
+        en: 'Phone',
+        ar: 'الهاتف',
+        fr: 'Téléphone'
+      },
+      'wilaya': {
+        en: 'Wilaya',
+        ar: 'الولاية',
+        fr: 'Wilaya'
+      },
+      'select_wilaya': {
+        en: 'Select Wilaya',
+        ar: 'اختر الولاية',
+        fr: 'Sélectionner Wilaya'
+      },
+      'commune': {
+        en: 'Commune',
+        ar: 'البلدية',
+        fr: 'Commune'
+      },
+      'full_address': {
+        en: 'Full Address',
+        ar: 'العنوان الكامل',
+        fr: 'Adresse Complète'
+      },
+      'delivery_type': {
+        en: 'Delivery Type',
+        ar: 'نوع التوصيل',
+        fr: 'Type de Livraison'
+      },
+      'home_delivery': {
+        en: 'Home Delivery',
+        ar: 'توصيل للمنزل',
+        fr: 'Livraison à Domicile'
+      },
+      'delivered_to_address': {
+        en: 'Delivered to your address',
+        ar: 'يتم التوصيل إلى عنوانك',
+        fr: 'Livré à votre adresse'
+      },
+      'office_pickup': {
+        en: 'Office Pickup',
+        ar: 'استلام من المكتب',
+        fr: 'Retrait au Bureau'
+      },
+      'pickup_discount': {
+        en: 'Pick up from office (20% discount)',
+        ar: 'استلام من المكتب (خصم 20%)',
+        fr: 'Retrait au bureau (20% de réduction)'
+      },
+      'payment_method_cod': {
+        en: 'Payment Method: Cash on Delivery',
+        ar: 'طريقة الدفع: الدفع عند التسليم',
+        fr: 'Méthode de Paiement: Paiement à la Livraison'
+      },
+      'confirmation_call_info': {
+        en: 'You will receive a confirmation call within 24 hours to confirm your order and arrange delivery.',
+        ar: 'ستتلقى مكالمة تأكيد خلال 24 ساعة لتأكيد طلبك وترتيب التوصيل.',
+        fr: 'Vous recevrez un appel de confirmation dans les 24 heures pour confirmer votre commande et organiser la livraison.'
+      },
+      'delivery_information': {
+        en: 'Delivery Information',
+        ar: 'معلومات التوصيل',
+        fr: 'Informations de Livraison'
+      },
+      'estimated_delivery': {
+        en: 'Estimated delivery',
+        ar: 'التوصيل المتوقع',
+        fr: 'Livraison estimée'
+      },
+      'business_days': {
+        en: 'business days',
+        ar: 'أيام عمل',
+        fr: 'jours ouvrables'
+      },
+      'cost': {
+        en: 'Cost',
+        ar: 'التكلفة',
+        fr: 'Coût'
+      },
+      'payment_method': {
+        en: 'Payment Method',
+        ar: 'طريقة الدفع',
+        fr: 'Méthode de Paiement'
+      },
+      'cod_confirmation': {
+        en: 'Cash on Delivery - You will receive a confirmation call',
+        ar: 'الدفع عند التسليم - ستتلقى مكالمة تأكيد',
+        fr: 'Paiement à la Livraison - Vous recevrez un appel de confirmation'
+      },
+      'order_summary': {
+        en: 'Order Summary',
+        ar: 'ملخص الطلب',
+        fr: 'Résumé de Commande'
+      },
+      'qty': {
+        en: 'Qty',
+        ar: 'الكمية',
+        fr: 'Qté'
+      },
+      'calculated_at_checkout': {
+        en: 'Calculated at checkout',
+        ar: 'محسوب عند الدفع',
+        fr: 'Calculé à la commande'
       }
     };
     return translations[key]?.[currentLanguage] || key;
@@ -215,7 +335,7 @@ const Checkout: React.FC = () => {
             onClick={() => navigate('/')}
             className="bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors"
           >
-            Continue Shopping
+            {getTranslatedText('continue_shopping')}
           </button>
         </div>
       </div>
