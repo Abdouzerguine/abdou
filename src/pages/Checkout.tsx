@@ -134,6 +134,7 @@ const Checkout: React.FC = () => {
       }
       groups[storeId].items.push(item);
       return groups;
+    }, {});
 
     // Create separate orders for each store
     Object.values(storeGroups).forEach(group => {
