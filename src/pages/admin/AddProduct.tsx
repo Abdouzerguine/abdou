@@ -122,23 +122,6 @@ const AddProduct: React.FC = () => {
     }
   };
 
-  const handleFileUpload = (index: number, file: File) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const result = e.target?.result as string;
-      updateImageField(index, result);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const copyProductLink = () => {
-    if (createdProductId) {
-      const productLink = `${window.location.origin}/product/${createdProductId}`;
-      navigator.clipboard.writeText(productLink);
-      alert('Product link copied to clipboard! You can now share it on social media.');
-    }
-  };
-
   return (
     <div className="space-y-6">
       {/* Success Message */}
@@ -271,15 +254,16 @@ const AddProduct: React.FC = () => {
                     
                     {/* URL Input */}
                     <div className="relative">
-                    <input
-                      type="url"
-                      value={image}
+                      <input
+                        type="url"
+                        value={image}
+                        onChange={(e) => updateImageField(index, e.target.value)}
                         placeholder="Or enter image URL"
-                      placeholder="Enter image URL (e.g., from Pexels)"
-                        required={index === 0 && !image.startsWith('data:')}
-                      required={index === 0}
-                    />
-                    <Image className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                        className="w-full pl-12 pr-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                        required={index === 0}
+                      />
+                      <Image className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                    </div>
                     
                     {/* Image Preview */}
                     {image && (
