@@ -120,12 +120,20 @@ const Checkout: React.FC = () => {
 
     // Group items by store
     const storeGroups = items.reduce((groups, item) => {
-      if (!groups[item.store.id]) {
-        groups[item.store.id] = { store: item.store, items: [] };
+      const storeId = item.product.storeId || 'default-store';
+      const store = stores.find(s => s.id === storeId) || { 
+        id: storeId, 
+        name: 'Tiny Treasure', 
+        description: '', 
+        logo: '', 
+        contactInfo: { phone: '', email: '', address: '' } 
+      };
+      
+      if (!groups[storeId]) {
+        groups[storeId] = { store, items: [] };
       }
-      groups[item.store.id].items.push(item);
+      groups[storeId].items.push(item);
       return groups;
-    }, {} as Record<string, { store: any; items: any[] }>);
 
     // Create separate orders for each store
     Object.values(storeGroups).forEach(group => {
