@@ -290,8 +290,15 @@ const Home: React.FC = () => {
               to="/categories"
               className="hidden md:flex items-center space-x-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors"
             >
+              <span>{getTranslatedText('view_all')}</span>
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-700 dark:to-blue-700 text-white bg-gray-50 dark:bg-gray-900">
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-700 dark:to-blue-700 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="transform transition-all duration-300 hover:scale-110">
