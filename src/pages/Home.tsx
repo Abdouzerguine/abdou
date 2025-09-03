@@ -11,9 +11,6 @@ import { categories } from '../data/mockData';
 const Home: React.FC = () => {
   const { products, platformSettings } = useApp();
   const { currentLanguage } = useLanguage();
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
-  const [videoRef, setVideoRef] = useState<HTMLVideoElement | null>(null);
 
   const welcomeText = useTranslation('welcome');
   const featuredProductsText = useTranslation('featured_products');
@@ -21,23 +18,6 @@ const Home: React.FC = () => {
   // Featured products (first 6 products)
   const featuredProducts = products.filter(p => p.isActive).slice(0, 6);
 
-  const toggleVideo = () => {
-    if (videoRef) {
-      if (isVideoPlaying) {
-        videoRef.pause();
-      } else {
-        videoRef.play();
-      }
-      setIsVideoPlaying(!isVideoPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (videoRef) {
-      videoRef.muted = !videoRef.muted;
-      setIsMuted(videoRef.muted);
-    }
-  };
 
   const getTranslatedText = (key: string) => {
     const translations = {
@@ -155,52 +135,50 @@ const Home: React.FC = () => {
       <FloatingSocialMedia />
       
       {/* Hero Video Section */}
-      <section className="relative h-screen overflow-hidden">
-        <video
-          ref={setVideoRef}
-          className="w-full h-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          onLoadedData={() => setIsVideoPlaying(true)}
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+      <section className="relative h-screen overflow-hidden bg-gradient-to-br from-teal-900 via-gray-900 to-blue-900">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-r from-teal-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-green-400/20 to-teal-400/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+        </div>
         
-        {/* Video Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+        {/* Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-white/20 rounded-full animate-bounce delay-300"></div>
+          <div className="absolute top-3/4 left-3/4 w-3 h-3 bg-teal-400/40 rounded-full animate-bounce delay-700"></div>
+          <div className="absolute top-1/2 left-1/6 w-2 h-2 bg-blue-400/30 rounded-full animate-bounce delay-1000"></div>
+          <div className="absolute top-1/3 right-1/4 w-5 h-5 bg-purple-400/20 rounded-full animate-bounce delay-500"></div>
+        </div>
         
         {/* Hero Content */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center">
+        <div className="relative z-20 flex items-center justify-center h-full">
           <div className="text-center text-white max-w-4xl mx-auto px-4">
             <div className="flex justify-center mb-6">
               <img 
                 src="/1751431085937.png" 
                 alt="Tiny Treasure Logo" 
-                className="w-24 h-24 object-contain drop-shadow-2xl animate-pulse"
+                className="w-24 h-24 object-contain drop-shadow-2xl transform transition-all duration-1000 hover:scale-110 hover:rotate-12"
               />
             </div>
-            <h1 className="text-4xl md:text-7xl font-bold mb-6 animate-fade-in-up">
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-teal-200 to-blue-200 bg-clip-text text-transparent animate-pulse">
               {getTranslatedText('hero_title')}
             </h1>
-            <p className="text-xl md:text-3xl mb-4 text-gray-200 animate-fade-in-up animation-delay-200">
+            <p className="text-xl md:text-3xl mb-4 text-teal-100 transform transition-all duration-700 hover:scale-105">
               {getTranslatedText('hero_subtitle')}
             </p>
-            <p className="text-lg md:text-xl mb-8 text-gray-300 animate-fade-in-up animation-delay-300">
+            <p className="text-lg md:text-xl mb-8 text-gray-200 transform transition-all duration-700 hover:scale-105">
               {getTranslatedText('hero_description')}
             </p>
             <Link
               to="/categories"
-              className="inline-flex items-center space-x-3 bg-gradient-to-r from-teal-600 to-green-600 text-white px-8 py-4 rounded-xl hover:from-teal-700 hover:to-green-700 transition-all duration-300 text-lg font-medium shadow-2xl transform hover:scale-105 animate-fade-in-up animation-delay-400"
+              className="inline-flex items-center space-x-3 bg-gradient-to-r from-teal-600 to-green-600 text-white px-8 py-4 rounded-xl hover:from-teal-700 hover:to-green-700 transition-all duration-300 text-lg font-medium shadow-2xl transform hover:scale-110 hover:shadow-teal-500/50"
             >
               <span>{getTranslatedText('shop_now')}</span>
               <ArrowRight className="h-6 w-6" />
             </Link>
           </div>
         </div>
-
-        {/* Video Controls */}
       </section>
 
       {/* Why Choose Us Section */}
