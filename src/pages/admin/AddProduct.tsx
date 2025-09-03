@@ -105,7 +105,7 @@ const AddProduct: React.FC = () => {
     }
   };
 
-  const handleFileUpload = (index: number, file: File) => {
+  const handleProductImageFileChange = (index: number, file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
       const result = e.target?.result as string;
@@ -239,7 +239,7 @@ const AddProduct: React.FC = () => {
                         onChange={(e) => {
                           const file = e.target.files?.[0];
                           if (file) {
-                            handleFileUpload(index, file);
+                            handleProductImageFileChange(index, file);
                           }
                         }}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
