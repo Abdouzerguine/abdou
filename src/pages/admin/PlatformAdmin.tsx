@@ -153,7 +153,7 @@ const PlatformAdmin: React.FC = () => {
     setShowProductModal(false);
     setEditingProduct(null);
     setProductForm({
-      storeId: '',
+      storeId: 'tiny-treasure', // Default store ID
       name: '',
       description: '',
       specifications: '',

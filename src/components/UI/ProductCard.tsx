@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Product } from '../../types';
+import { Product, Store } from '../../types';
 import { Truck, MapPin, Package, AlertTriangle, ShoppingCart, Plus } from 'lucide-react';
 import { useTranslation } from '../../contexts/LanguageContext';
 import { useCart } from '../../contexts/CartContext';

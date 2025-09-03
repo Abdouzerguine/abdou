@@ -67,7 +67,7 @@ const AddProduct: React.FC = () => {
     setCreatedProductId(productId);
     // Reset form
     setProductForm({
-      storeId: 'tiny-treasure',
+      storeId: 'tiny-treasure', // Default store ID
       name: '',
       description: '',
       specifications: '',
