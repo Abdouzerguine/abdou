@@ -49,20 +49,72 @@ const ProductPage: React.FC = () => {
 
   const shareToSocial = (platform: string) => {
     const productUrl = window.location.href;
-    const text = `Check out this amazing product: ${product.name} - Only ${product.price.toLocaleString()} DA at Tiny Treasure!`;
+    
+    // Enhanced text formatting for different platforms
+    const facebookText = `🛍️ Amazing Deal Alert! 🛍️
+
+✨ ${product.name}
+💰 Special Price: ${product.price.toLocaleString()} DA
+${product.isFreeShipping ? '🚚 FREE SHIPPING included!' : '🚚 Fast delivery available'}
+
+📱 Shop now at Tiny Treasure - Algeria's trusted online store!
+⭐ Quality guaranteed | 📦 Delivery to all 58 wilayas
+
+#TinyTreasure #Algeria #OnlineShopping #QualityProducts #${product.category.replace(/\s+/g, '')}`;
+
+    const instagramText = `🛍️✨ NEW ARRIVAL ALERT! ✨🛍️
+
+${product.name} 
+💰 ${product.price.toLocaleString()} DA
+${product.isFreeShipping ? '🚚 FREE SHIPPING' : '🚚 Fast Delivery'}
+
+📱 Link in bio to shop now!
+⭐ Quality guaranteed
+📦 All 58 wilayas covered
+
+#TinyTreasure #Algeria #Shopping #${product.category.replace(/\s+/g, '')} #QualityProducts #OnlineStore #AlgerianBusiness #TrustedStore`;
+
+    const whatsappText = `🛍️ *${product.name}*
+
+💰 *Special Price: ${product.price.toLocaleString()} DA*
+${product.isFreeShipping ? '🚚 *FREE SHIPPING*' : '🚚 *Fast Delivery Available*'}
+
+✨ ${product.description.substring(0, 100)}...
+
+📱 Order now from Tiny Treasure:`;
+
+    const tiktokText = `🛍️ PRODUCT SPOTLIGHT 🛍️
+
+${product.name}
+💰 ${product.price.toLocaleString()} DA
+${product.isFreeShipping ? '🚚 FREE SHIPPING' : '🚚 Fast Delivery'}
+
+✨ ${product.description.substring(0, 80)}...
+
+📱 Link in bio to order!
+⭐ Quality guaranteed
+📦 Delivery across Algeria
+
+#TinyTreasure #Algeria #Shopping #${product.category.replace(/\s+/g, '')} #OnlineStore #QualityProducts #AlgerianBusiness #TrustedShopping #DeliveryService`;
     
     let shareUrl = '';
+    let shareText = '';
+    
     switch (platform) {
       case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
+        shareText = facebookText;
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&quote=${encodeURIComponent(shareText)}`;
         break;
       case 'instagram':
-        // Instagram doesn't support direct URL sharing, so copy to clipboard
-        navigator.clipboard.writeText(`${text} ${productUrl}`);
-        alert('Product info copied to clipboard! You can now paste it in your Instagram post or story.');
+        navigator.clipboard.writeText(`${instagramText}\n\n${productUrl}`);
+        alert(getTranslatedText('instagram_copied'));
+        return;
+      case 'tiktok':
+        navigator.clipboard.writeText(`${tiktokText}\n\n${productUrl}`);
+        alert(getTranslatedText('tiktok_copied'));
         return;
       case 'whatsapp':
-        shareUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${productUrl}`)}`;
+        shareUrl = `https://wa.me/?text=${encodeURIComponent(`${whatsappText}\n${productUrl}`)}`;
         break;
     }
     
@@ -366,7 +418,7 @@ const ProductPage: React.FC = () => {
                   className="w-full flex items-center space-x-3 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <Facebook className="h-5 w-5" />
-                  <span>{getTranslatedText('share_facebook')}</span>
+                  <span>📘 Post to Facebook</span>
                 </button>
                 
                 <button
@@ -374,19 +426,17 @@ const ProductPage: React.FC = () => {
                   className="w-full flex items-center space-x-3 p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors"
                 >
                   <Instagram className="h-5 w-5" />
-                  <span>{getTranslatedText('copy_instagram')}</span>
+                  <span>📸 Copy for Instagram</span>
                 </button>
                 
                 <button
                   onClick={() => {
-                    const text = `Check out this amazing product: ${product.name} - Only ${product.price.toLocaleString()} DA at Tiny Treasure! ${window.location.href}`;
-                    navigator.clipboard.writeText(text);
-                    alert(getTranslatedText('tiktok_copied'));
+                    shareToSocial('tiktok');
                   }}
                   className="w-full flex items-center space-x-3 p-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
                 >
                   <TikTokIcon />
-                  <span>{getTranslatedText('copy_tiktok')}</span>
+                  <span>🎬 Copy for TikTok</span>
                 </button>
                 
                 <button
@@ -394,7 +444,7 @@ const ProductPage: React.FC = () => {
                   className="w-full flex items-center space-x-3 p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                 >
                   <Share2 className="h-5 w-5" />
-                  <span>{getTranslatedText('share_whatsapp')}</span>
+                  <span>💬 Share on WhatsApp</span>
                 </button>
                 
                 <button

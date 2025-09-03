@@ -214,9 +214,14 @@ const translations = {
     fr: 'Lien du produit copié!'
   },
   'tiktok_copied': {
-    en: 'Product info copied for TikTok! You can now paste it in your TikTok video description.',
-    ar: 'تم نسخ معلومات المنتج لتيك توك! يمكنك الآن لصقها في وصف الفيديو.',
-    fr: 'Informations du produit copiées pour TikTok! Vous pouvez maintenant les coller dans la description de votre vidéo.'
+    en: '🎬 TikTok post content copied! Perfect for your video description with hashtags and product details.',
+    ar: '🎬 تم نسخ محتوى منشور تيك توك! مثالي لوصف الفيديو مع الهاشتاغات وتفاصيل المنتج.',
+    fr: '🎬 Contenu de post TikTok copié! Parfait pour la description de votre vidéo avec hashtags et détails produit.'
+  },
+  'instagram_copied': {
+    en: '📸 Instagram post content copied! Ready to paste with hashtags and product details.',
+    ar: '📸 تم نسخ محتوى منشور إنستغرام! جاهز للصق مع الهاشتاغات وتفاصيل المنتج.',
+    fr: '📸 Contenu de post Instagram copié! Prêt à coller avec hashtags et détails produit.'
   }
 };
 

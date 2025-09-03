@@ -169,7 +169,7 @@ export const categories: Category[] = [
     name: 'Electronics', 
     nameAr: 'إلكترونيات', 
     nameFr: 'Électronique', 
-    icon: '📱', 
+    icon: '⚡', 
     isActive: true,
     seoTitle: 'Electronics - Latest Gadgets and Devices',
     seoDescription: 'Discover the latest electronics, smartphones, laptops, and gadgets from top brands.'
@@ -179,7 +179,7 @@ export const categories: Category[] = [
     name: 'Clothing', 
     nameAr: 'ملابس', 
     nameFr: 'Vêtements', 
-    icon: '👕', 
+    icon: '👗', 
     isActive: true,
     seoTitle: 'Fashion & Clothing - Trendy Apparel',
     seoDescription: 'Shop the latest fashion trends, clothing, and accessories for men and women.'
@@ -189,7 +189,7 @@ export const categories: Category[] = [
     name: 'Cosmetics', 
     nameAr: 'مستحضرات تجميل', 
     nameFr: 'Cosmétiques', 
-    icon: '✨', 
+    icon: '💄', 
     isActive: true,
     seoTitle: 'Beauty & Cosmetics - Premium Products',
     seoDescription: 'Explore premium cosmetics, skincare, and beauty products from trusted brands.'
@@ -199,7 +199,7 @@ export const categories: Category[] = [
     name: 'Home & Garden', 
     nameAr: 'المنزل والحديقة', 
     nameFr: 'Maison et Jardin', 
-    icon: '🛋️', 
+    icon: '🏡', 
     isActive: true,
     seoTitle: 'Home & Garden - Decor and Essentials',
     seoDescription: 'Transform your home and garden with our collection of decor, furniture, and essentials.'
@@ -209,7 +209,7 @@ export const categories: Category[] = [
     name: 'Sports', 
     nameAr: 'رياضة', 
     nameFr: 'Sports', 
-    icon: '🏃‍♂️', 
+    icon: '🏆', 
     isActive: true,
     seoTitle: 'Sports & Fitness - Equipment and Apparel',
     seoDescription: 'Get fit with our sports equipment, fitness gear, and athletic apparel.'
@@ -219,7 +219,7 @@ export const categories: Category[] = [
     name: 'Books', 
     nameAr: 'كتب', 
     nameFr: 'Livres', 
-    icon: '📖', 
+    icon: '📚', 
     isActive: true,
     seoTitle: 'Books & Literature - Educational and Entertainment',
     seoDescription: 'Discover a wide collection of books, novels, educational materials, and more.'
@@ -229,7 +229,7 @@ export const categories: Category[] = [
     name: 'Jewelry', 
     nameAr: 'مجوهرات', 
     nameFr: 'Bijoux', 
-    icon: '💍', 
+    icon: '💎', 
     isActive: true,
     seoTitle: 'Jewelry & Accessories - Elegant Pieces',
     seoDescription: 'Find beautiful jewelry, watches, and accessories for every occasion.'
@@ -239,7 +239,7 @@ export const categories: Category[] = [
     name: 'Food & Beverages', 
     nameAr: 'طعام ومشروبات', 
     nameFr: 'Alimentation', 
-    icon: '🥘', 
+    icon: '🍯', 
     isActive: true,
     seoTitle: 'Food & Beverages - Local Specialties',
     seoDescription: 'Taste authentic Algerian food products, spices, and traditional beverages.'
