@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Star, Truck, Shield, Package, Plus, Minus, ShoppingCart, Heart, Share2 } from 'lucide-react';
+import { ArrowLeft, Star, Truck, Shield, Package, Plus, Minus, ShoppingCart, Heart, Share2, ExternalLink, Facebook, Instagram } from 'lucide-react';
 import { useApp } from '../contexts/AppContext';
 import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -8,7 +8,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { products } = useApp();
+  const { products, platformSettings } = useApp();
   const { addToCart } = useCart();
   const { currentLanguage } = useLanguage();
   
@@ -16,6 +16,7 @@ const ProductPage: React.FC = () => {
   const [selectedVariant, setSelectedVariant] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
   const [isAdding, setIsAdding] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   const product = products.find(p => p.id === id);
 
@@ -45,6 +46,37 @@ const ProductPage: React.FC = () => {
       setIsAdding(false);
     }, 700);
   };
+
+  const shareToSocial = (platform: string) => {
+    const productUrl = window.location.href;
+    const text = `Check out this amazing product: ${product.name} - Only ${product.price.toLocaleString()} DA at Tiny Treasure!`;
+    
+    let shareUrl = '';
+    switch (platform) {
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
+        break;
+      case 'instagram':
+        // Instagram doesn't support direct URL sharing, so copy to clipboard
+        navigator.clipboard.writeText(`${text} ${productUrl}`);
+        alert('Product info copied to clipboard! You can now paste it in your Instagram post or story.');
+        return;
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${productUrl}`)}`;
+        break;
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+  };
+
+  // TikTok Icon Component
+  const TikTokIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43V7.56a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.05z"/>
+    </svg>
+  );
 
   const getTranslatedText = (key: string) => {
     const translations = {
@@ -257,7 +289,10 @@ const ProductPage: React.FC = () => {
                   <Heart className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                 </button>
                 
-                <button className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <button 
+                  onClick={() => setShowShareModal(true)}
+                  className="p-3 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                >
                   <Share2 className="h-5 w-5 text-gray-600 dark:text-gray-300" />
                 </button>
               </div>
@@ -310,6 +345,73 @@ const ProductPage: React.FC = () => {
             )}
           </div>
         </div>
+
+        {/* Share Modal */}
+        {showShareModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white dark:bg-gray-800 rounded-xl p-6 w-full max-w-md mx-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Share Product</h3>
+                <button
+                  onClick={() => setShowShareModal(false)}
+                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  <X className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+                </button>
+              </div>
+              
+              <div className="space-y-3">
+                <button
+                  onClick={() => shareToSocial('facebook')}
+                  className="w-full flex items-center space-x-3 p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <Facebook className="h-5 w-5" />
+                  <span>Share on Facebook</span>
+                </button>
+                
+                <button
+                  onClick={() => shareToSocial('instagram')}
+                  className="w-full flex items-center space-x-3 p-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-colors"
+                >
+                  <Instagram className="h-5 w-5" />
+                  <span>Copy for Instagram</span>
+                </button>
+                
+                <button
+                  onClick={() => {
+                    const text = `Check out this amazing product: ${product.name} - Only ${product.price.toLocaleString()} DA at Tiny Treasure! ${window.location.href}`;
+                    navigator.clipboard.writeText(text);
+                    alert('Product info copied for TikTok! You can now paste it in your TikTok video description.');
+                  }}
+                  className="w-full flex items-center space-x-3 p-3 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  <TikTokIcon />
+                  <span>Copy for TikTok</span>
+                </button>
+                
+                <button
+                  onClick={() => shareToSocial('whatsapp')}
+                  className="w-full flex items-center space-x-3 p-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                >
+                  <Share2 className="h-5 w-5" />
+                  <span>Share on WhatsApp</span>
+                </button>
+                
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Product link copied to clipboard!');
+                    setShowShareModal(false);
+                  }}
+                  className="w-full flex items-center space-x-3 p-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  <span>Copy Link</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

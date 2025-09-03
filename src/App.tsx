@@ -4,7 +4,6 @@ import { AppProvider } from './contexts/AppContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { CartProvider } from './contexts/CartContext';
-import { CommissionProvider } from './contexts/CommissionContext';
 import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer';
@@ -24,7 +23,6 @@ function App() {
       <LanguageProvider>
         <AuthProvider>
           <AppProvider>
-            <CommissionProvider>
               <CartProvider>
                 <Router>
                   <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -52,7 +50,6 @@ function App() {
                   </div>
                 </Router>
               </CartProvider>
-            </CommissionProvider>
           </AppProvider>
         </AuthProvider>
       </LanguageProvider>

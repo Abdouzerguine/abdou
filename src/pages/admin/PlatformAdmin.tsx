@@ -4,7 +4,6 @@ import {
   Package, 
   ShoppingCart, 
   Settings, 
-  DollarSign,
   Plus,
   Edit,
   Trash2,
@@ -16,14 +15,11 @@ import {
   LogOut
 } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
-import { useCommission } from '../../contexts/CommissionContext';
 import { useAuth } from '../../contexts/AuthContext';
 import AnalyticsDashboard from '../../components/Admin/AnalyticsDashboard';
 import OrderManagement from '../../components/Admin/OrderManagement';
 import BulkProductUpload from '../../components/Admin/BulkProductUpload';
 import ShippingConfiguration from '../../components/Admin/ShippingConfiguration';
-import CommissionDashboard from '../../components/Commission/CommissionDashboard';
-import CommissionSettings from '../../components/Commission/CommissionSettings';
 import AddProduct from './AddProduct';
 import { Product } from '../../types';
 import { categories } from '../../data/mockData';
@@ -168,7 +164,6 @@ const PlatformAdmin: React.FC = () => {
     { id: 'products', label: 'Products', icon: Package },
   { id: 'add-product', label: 'Add Product', icon: Plus },
     { id: 'orders', label: 'Orders', icon: ShoppingCart },
-    { id: 'commission', label: 'Commission', icon: DollarSign },
     { id: 'bulk-upload', label: 'Bulk Upload', icon: Upload },
     { id: 'shipping', label: 'Shipping', icon: Settings }
   ];
@@ -253,7 +248,7 @@ const PlatformAdmin: React.FC = () => {
                         <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{product.name}</h3>
                         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Tiny Treasure</p>
                         <p className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-3">{product.price.toLocaleString()} DA</p>
-                        <div className="flex space-x-2">
+                        <div className="flex space-x-2 mb-3">
                           <button
                             onClick={() => handleEditProduct(product)}
                             className="flex-1 bg-blue-500 text-white px-3 py-2 rounded-lg hover:bg-blue-600 transition-all duration-200 flex items-center justify-center space-x-1 transform hover:scale-105"
@@ -267,6 +262,28 @@ const PlatformAdmin: React.FC = () => {
                           >
                             <Trash2 className="h-4 w-4" />
                             <span>Delete</span>
+                          </button>
+                        </div>
+                        <div className="flex space-x-2">
+                          <a
+                            href={`/product/${product.id}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex-1 bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-green-600 transition-all duration-200 flex items-center justify-center space-x-1 transform hover:scale-105 text-xs"
+                          >
+                            <Eye className="h-3 w-3" />
+                            <span>View Page</span>
+                          </a>
+                          <button
+                            onClick={() => {
+                              const productLink = `${window.location.origin}/product/${product.id}`;
+                              navigator.clipboard.writeText(productLink);
+                              alert('Product link copied! Share it on social media.');
+                            }}
+                            className="flex-1 bg-purple-500 text-white px-3 py-2 rounded-lg hover:bg-purple-600 transition-all duration-200 flex items-center justify-center space-x-1 transform hover:scale-105 text-xs"
+                          >
+                            <Share2 className="h-3 w-3" />
+                            <span>Copy Link</span>
                           </button>
                         </div>
                       </div>
@@ -299,7 +316,6 @@ const PlatformAdmin: React.FC = () => {
           )}
 
           {activeTab === 'orders' && <OrderManagement />}
-          {activeTab === 'commission' && <CommissionDashboard />}
           {activeTab === 'bulk-upload' && <BulkProductUpload />}
           {activeTab === 'shipping' && <ShippingConfiguration />}
         </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Save, Package, Image, Plus, X, ArrowLeft } from 'lucide-react';
+import { Save, Package, Image, Plus, X, ArrowLeft, Upload, Eye, ExternalLink } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { categories } from '../../data/mockData';
 import { Product } from '../../types';
@@ -8,6 +8,7 @@ const AddProduct: React.FC = () => {
   const { addProduct } = useApp();
   const [productImages, setProductImages] = useState<string[]>(['']);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [createdProductId, setCreatedProductId] = useState<string | null>(null);
   
   const [productForm, setProductForm] = useState({
     storeId: 'tiny-treasure',
@@ -31,8 +32,9 @@ const AddProduct: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    const productId = Date.now().toString() + Math.random().toString(36).substr(2, 9);
     const product: Product = {
-      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+      id: productId,
       storeId: productForm.storeId,
       name: productForm.name,
       description: productForm.description,
@@ -60,6 +62,7 @@ const AddProduct: React.FC = () => {
 
     addProduct(product);
     
+    setCreatedProductId(productId);
     // Reset form
     setProductForm({
       storeId: 'tiny-treasure',
@@ -102,11 +105,45 @@ const AddProduct: React.FC = () => {
     }
   };
 
+  const handleFileUpload = (index: number, file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      updateImageField(index, result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const copyProductLink = () => {
+    if (createdProductId) {
+      const productLink = `${window.location.origin}/product/${createdProductId}`;
+      navigator.clipboard.writeText(productLink);
+      alert('Product link copied to clipboard! You can now share it on social media.');
+    }
+  };
+
+  const handleFileUpload = (index: number, file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const result = e.target?.result as string;
+      updateImageField(index, result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const copyProductLink = () => {
+    if (createdProductId) {
+      const productLink = `${window.location.origin}/product/${createdProductId}`;
+      navigator.clipboard.writeText(productLink);
+      alert('Product link copied to clipboard! You can now share it on social media.');
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Success Message */}
       {showSuccess && (
-        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4">
+        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6">
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
               <Save className="h-4 w-4 text-white" />
@@ -116,6 +153,27 @@ const AddProduct: React.FC = () => {
               <p className="text-green-700 dark:text-green-300 text-sm">Your product has been saved to the local database.</p>
             </div>
           </div>
+          {createdProductId && (
+            <div className="mt-4 flex flex-col sm:flex-row gap-3">
+              <a
+                href={`/product/${createdProductId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm"
+              >
+                <Eye className="h-4 w-4" />
+                <span>View Product Page</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
+              <button
+                onClick={copyProductLink}
+                className="flex items-center space-x-2 bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition-colors text-sm"
+              >
+                <ExternalLink className="h-4 w-4" />
+                <span>Copy Link for Social Media</span>
+              </button>
+            </div>
+          )}
         </div>
       )}
 
@@ -185,19 +243,57 @@ const AddProduct: React.FC = () => {
           {/* Product Images */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Product Images</label>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">Upload from your device or enter image URLs</p>
             <div className="space-y-3">
               {productImages.map((image, index) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <div className="flex-1 relative">
+                  <div className="flex-1 space-y-2">
+                    {/* File Upload */}
+                    <div className="relative">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            handleFileUpload(index, file);
+                          }
+                        }}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                      <div className="flex items-center justify-center w-full h-12 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-teal-400 dark:hover:border-teal-500 transition-colors bg-white dark:bg-gray-700">
+                        <div className="flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+                          <Upload className="h-4 w-4" />
+                          <span className="text-sm">Upload from device</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* URL Input */}
+                    <div className="relative">
                     <input
                       type="url"
                       value={image}
-                      onChange={(e) => updateImageField(index, e.target.value)}
+                        placeholder="Or enter image URL"
                       placeholder="Enter image URL (e.g., from Pexels)"
-                      className="w-full pl-10 pr-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                        required={index === 0 && !image.startsWith('data:')}
                       required={index === 0}
                     />
                     <Image className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                    
+                    {/* Image Preview */}
+                    {image && (
+                      <div className="relative">
+                        <img 
+                          src={image} 
+                          alt={`Preview ${index + 1}`} 
+                          className="w-full h-32 object-cover rounded-lg border border-gray-200 dark:border-gray-600"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
                   {productImages.length > 1 && (
                     <button
