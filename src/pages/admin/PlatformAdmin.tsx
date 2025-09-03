@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { 
   BarChart3, 
-  Store, 
   Package, 
   ShoppingCart, 
-  Users, 
   Settings, 
   DollarSign,
   Plus,
@@ -14,10 +12,12 @@ import {
   Upload,
   Image,
   X,
-  Save
+  Save,
+  LogOut
 } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
 import { useCommission } from '../../contexts/CommissionContext';
+import { useAuth } from '../../contexts/AuthContext';
 import AnalyticsDashboard from '../../components/Admin/AnalyticsDashboard';
 import OrderManagement from '../../components/Admin/OrderManagement';
 import BulkProductUpload from '../../components/Admin/BulkProductUpload';
@@ -25,39 +25,23 @@ import ShippingConfiguration from '../../components/Admin/ShippingConfiguration'
 import CommissionDashboard from '../../components/Commission/CommissionDashboard';
 import CommissionSettings from '../../components/Commission/CommissionSettings';
 import AddProduct from './AddProduct';
-import { Store as StoreType, Product } from '../../types';
+import { Product } from '../../types';
 import { categories } from '../../data/mockData';
 
 const PlatformAdmin: React.FC = () => {
   const { 
-    stores, 
     products, 
-    addStore, 
-    updateStore, 
-    deleteStore, 
     addProduct, 
     updateProduct, 
-    deleteProduct,
-    generateStorePassword
+    deleteProduct
   } = useApp();
+  const { logout, userEmail } = useAuth();
   
   const [activeTab, setActiveTab] = useState('overview');
-  const [showStoreModal, setShowStoreModal] = useState(false);
   const [showProductModal, setShowProductModal] = useState(false);
-  const [editingStore, setEditingStore] = useState<StoreType | null>(null);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [productImages, setProductImages] = useState<string[]>(['']);
 
-  const [storeForm, setStoreForm] = useState({
-    name: '',
-    category: '',
-    description: '',
-    logo: '',
-    colorScheme: '#3B82F6',
-    phone: '',
-    email: '',
-    address: ''
-  });
 
   const [productForm, setProductForm] = useState({
     storeId: '',
@@ -78,50 +62,6 @@ const PlatformAdmin: React.FC = () => {
     tags: ''
   });
 
-  const handleStoreSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const storeData: StoreType = {
-      id: editingStore?.id || Date.now().toString(),
-      name: storeForm.name,
-      category: storeForm.category,
-      description: storeForm.description,
-      logo: storeForm.logo,
-      adminEmail: storeForm.email,
-      colorScheme: storeForm.colorScheme,
-      contactInfo: {
-        phone: storeForm.phone,
-        email: storeForm.email,
-        address: storeForm.address
-      },
-      isActive: true,
-      createdAt: editingStore?.createdAt || new Date().toISOString(),
-      currency: 'DZD',
-      settings: {
-        autoInventoryTracking: true,
-        emailNotifications: true,
-        seoOptimized: true
-      }
-    };
-
-    if (editingStore) {
-      updateStore(editingStore.id, storeData);
-    } else {
-      addStore(storeData);
-    }
-
-    setShowStoreModal(false);
-    setEditingStore(null);
-    setStoreForm({
-      name: '',
-      category: '',
-      description: '',
-      logo: '',
-      colorScheme: '#3B82F6',
-      phone: '',
-      email: '',
-      address: ''
-    });
-  };
 
   const handleProductSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -181,20 +121,6 @@ const PlatformAdmin: React.FC = () => {
     setProductImages(['']);
   };
 
-  const handleEditStore = (store: StoreType) => {
-    setEditingStore(store);
-    setStoreForm({
-      name: store.name,
-      category: store.category,
-      description: store.description,
-      logo: store.logo,
-      colorScheme: store.colorScheme,
-      phone: store.contactInfo.phone,
-      email: store.contactInfo.email,
-      address: store.contactInfo.address
-    });
-    setShowStoreModal(true);
-  };
 
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product);
@@ -239,7 +165,6 @@ const PlatformAdmin: React.FC = () => {
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: BarChart3 },
-    { id: 'stores', label: 'Stores', icon: Store },
     { id: 'products', label: 'Products', icon: Package },
   { id: 'add-product', label: 'Add Product', icon: Plus },
     { id: 'orders', label: 'Orders', icon: ShoppingCart },
@@ -257,10 +182,24 @@ const PlatformAdmin: React.FC = () => {
         {/* Sidebar with 3D effects */}
         <div className="w-64 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl shadow-2xl border-r border-white/20 dark:border-gray-700/20 min-h-screen">
           <div className="p-6 border-b border-gray-200/50 dark:border-gray-700/50">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
-              Platform Admin
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">Manage everything</p>
+            <div className="flex items-center space-x-3 mb-2">
+              <img 
+                src="/1751431085937.png" 
+                alt="Tiny Treasure Logo" 
+                className="w-8 h-8 object-contain"
+              />
+              <h1 className="text-xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
+                Tiny Treasure Admin
+              </h1>
+            </div>
+            <p className="text-gray-600 dark:text-gray-400 text-sm">Welcome, {userEmail}</p>
+            <button
+              onClick={logout}
+              className="mt-2 flex items-center space-x-1 text-xs text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors"
+            >
+              <LogOut className="h-3 w-3" />
+              <span>Logout</span>
+            </button>
           </div>
           
           <nav className="p-4">
@@ -288,56 +227,14 @@ const PlatformAdmin: React.FC = () => {
         <div className="flex-1 p-8">
           {activeTab === 'overview' && <AnalyticsDashboard />}
           
-          {activeTab === 'stores' && (
-            <div className="space-y-6">
-              <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Store Management</h2>
-                <button
-                  onClick={() => setShowStoreModal(true)}
-                  className="bg-gradient-to-r from-teal-600 to-blue-600 text-white px-6 py-3 rounded-xl hover:from-teal-700 hover:to-blue-700 transition-all duration-300 flex items-center space-x-2 shadow-lg transform hover:scale-105"
-                >
-                  <Plus className="h-5 w-5" />
-                  <span>Add Store</span>
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {stores.map((store) => (
-                  <div key={store.id} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20 p-6 transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <img src={store.logo} alt={store.name} className="w-12 h-12 rounded-full object-cover shadow-lg" />
-                      <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white">{store.name}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">{store.category}</p>
-                      </div>
-                    </div>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">{store.description}</p>
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => handleEditStore(store)}
-                        className="flex-1 bg-blue-500 text-white px-3 py-2 rounded-lg hover:bg-blue-600 transition-all duration-200 flex items-center justify-center space-x-1 transform hover:scale-105"
-                      >
-                        <Edit className="h-4 w-4" />
-                        <span>Edit</span>
-                      </button>
-                      <button
-                        onClick={() => deleteStore(store.id)}
-                        className="flex-1 bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 transition-all duration-200 flex items-center justify-center space-x-1 transform hover:scale-105"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                        <span>Delete</span>
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           {activeTab === 'products' && (
             <div className="space-y-6">
               <div className="flex justify-between items-center">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Product Management</h2>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Product Management</h2>
+                  <p className="text-gray-600 dark:text-gray-400">Manage your store products</p>
+                </div>
                 <button
                   onClick={() => setShowProductModal(true)}
                   className="bg-gradient-to-r from-green-600 to-teal-600 text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 flex items-center space-x-2 shadow-lg transform hover:scale-105"
@@ -349,13 +246,12 @@ const PlatformAdmin: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {products.map((product) => {
-                  const store = stores.find(s => s.id === product.storeId);
                   return (
                     <div key={product.id} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-xl shadow-lg border border-white/20 dark:border-gray-700/20 overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                       <img src={product.images[0]} alt={product.name} className="w-full h-48 object-cover" />
                       <div className="p-4">
                         <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{product.name}</h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{store?.name}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">Tiny Treasure</p>
                         <p className="text-lg font-bold text-teal-600 dark:text-teal-400 mb-3">{product.price.toLocaleString()} DA</p>
                         <div className="flex space-x-2">
                           <button
@@ -378,6 +274,21 @@ const PlatformAdmin: React.FC = () => {
                   );
                 })}
               </div>
+
+              {products.length === 0 && (
+                <div className="text-center py-12">
+                  <Package className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">No products yet</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">Start by adding your first product to the store</p>
+                  <button
+                    onClick={() => setShowProductModal(true)}
+                    className="bg-gradient-to-r from-green-600 to-teal-600 text-white px-6 py-3 rounded-xl hover:from-green-700 hover:to-teal-700 transition-all duration-300 flex items-center space-x-2 shadow-lg mx-auto"
+                  >
+                    <Plus className="h-5 w-5" />
+                    <span>Add Your First Product</span>
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -394,143 +305,6 @@ const PlatformAdmin: React.FC = () => {
         </div>
       </div>
 
-      {/* Store Modal */}
-      {showStoreModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-2xl p-8 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto shadow-2xl border border-white/20 dark:border-gray-700/20">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {editingStore ? 'Edit Store' : 'Add New Store'}
-              </h3>
-              <button
-                onClick={() => {
-                  setShowStoreModal(false);
-                  setEditingStore(null);
-                }}
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 transform hover:scale-110"
-              >
-                <X className="h-6 w-6 text-gray-500 dark:text-gray-400" />
-              </button>
-            </div>
-
-            <form onSubmit={handleStoreSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Store Name</label>
-                  <input
-                    type="text"
-                    value={storeForm.name}
-                    onChange={(e) => setStoreForm({...storeForm, name: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
-                  <select
-                    value={storeForm.category}
-                    onChange={(e) => setStoreForm({...storeForm, category: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  >
-                    <option value="">Select Category</option>
-                    {categories.map(cat => (
-                      <option key={cat.id} value={cat.name}>{cat.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Description</label>
-                <textarea
-                  value={storeForm.description}
-                  onChange={(e) => setStoreForm({...storeForm, description: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                  rows={3}
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Logo URL</label>
-                  <input
-                    type="url"
-                    value={storeForm.logo}
-                    onChange={(e) => setStoreForm({...storeForm, logo: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Color Scheme</label>
-                  <input
-                    type="color"
-                    value={storeForm.colorScheme}
-                    onChange={(e) => setStoreForm({...storeForm, colorScheme: e.target.value})}
-                    className="w-full h-12 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent transition-all duration-300"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone</label>
-                  <input
-                    type="tel"
-                    value={storeForm.phone}
-                    onChange={(e) => setStoreForm({...storeForm, phone: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
-                  <input
-                    type="email"
-                    value={storeForm.email}
-                    onChange={(e) => setStoreForm({...storeForm, email: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Address</label>
-                <input
-                  type="text"
-                  value={storeForm.address}
-                  onChange={(e) => setStoreForm({...storeForm, address: e.target.value})}
-                  className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                  required
-                />
-              </div>
-
-              <div className="flex space-x-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowStoreModal(false);
-                    setEditingStore(null);
-                  }}
-                  className="flex-1 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-105"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex-1 bg-gradient-to-r from-teal-600 to-blue-600 text-white py-3 rounded-xl hover:from-teal-700 hover:to-blue-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg transform hover:scale-105"
-                >
-                  <Save className="h-5 w-5" />
-                  <span>{editingStore ? 'Update Store' : 'Create Store'}</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
 
       {/* Product Modal */}
       {showProductModal && (
@@ -552,35 +326,19 @@ const PlatformAdmin: React.FC = () => {
             </div>
 
             <form onSubmit={handleProductSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Store</label>
-                  <select
-                    value={productForm.storeId}
-                    onChange={(e) => setProductForm({...productForm, storeId: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  >
-                    <option value="">Select Store</option>
-                    {stores.map(store => (
-                      <option key={store.id} value={store.id}>{store.name}</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
-                  <select
-                    value={productForm.category}
-                    onChange={(e) => setProductForm({...productForm, category: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                    required
-                  >
-                    <option value="">Select Category</option>
-                    {categories.map(cat => (
-                      <option key={cat.id} value={cat.name}>{cat.name}</option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+                <select
+                  value={productForm.category}
+                  onChange={(e) => setProductForm({...productForm, category: e.target.value})}
+                  className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                  required
+                >
+                  <option value="">Select Category</option>
+                  {categories.map(cat => (
+                    <option key={cat.id} value={cat.name}>{cat.icon} {cat.name}</option>
+                  ))}
+                </select>
               </div>
 
               <div>
@@ -590,6 +348,7 @@ const PlatformAdmin: React.FC = () => {
                   value={productForm.name}
                   onChange={(e) => setProductForm({...productForm, name: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                  placeholder="Enter product name"
                   required
                 />
               </div>
@@ -600,6 +359,7 @@ const PlatformAdmin: React.FC = () => {
                   value={productForm.description}
                   onChange={(e) => setProductForm({...productForm, description: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                  placeholder="Detailed product description"
                   rows={3}
                   required
                 />
@@ -611,6 +371,7 @@ const PlatformAdmin: React.FC = () => {
                   value={productForm.specifications}
                   onChange={(e) => setProductForm({...productForm, specifications: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                  placeholder="Technical specifications and features"
                   rows={2}
                   required
                 />
@@ -627,8 +388,9 @@ const PlatformAdmin: React.FC = () => {
                           type="url"
                           value={image}
                           onChange={(e) => updateImageField(index, e.target.value)}
-                          placeholder="Enter image URL"
+                          placeholder="Enter image URL (e.g., from Pexels)"
                           className="w-full pl-10 pr-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                          required={index === 0}
                         />
                         <Image className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
                       </div>
@@ -662,6 +424,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.price}
                     onChange={(e) => setProductForm({...productForm, price: parseInt(e.target.value) || 0})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="0"
                     required
                   />
                 </div>
@@ -672,6 +435,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.stockLevel}
                     onChange={(e) => setProductForm({...productForm, stockLevel: parseInt(e.target.value) || 0})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="0"
                     required
                   />
                 </div>
@@ -682,6 +446,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.lowStockAlert}
                     onChange={(e) => setProductForm({...productForm, lowStockAlert: parseInt(e.target.value) || 5})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="5"
                   />
                 </div>
               </div>
@@ -695,6 +460,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.weight}
                     onChange={(e) => setProductForm({...productForm, weight: parseFloat(e.target.value) || 0})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="0.0"
                   />
                 </div>
                 <div>
@@ -704,6 +470,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.length}
                     onChange={(e) => setProductForm({...productForm, length: parseInt(e.target.value) || 0})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="0"
                   />
                 </div>
                 <div>
@@ -713,6 +480,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.width}
                     onChange={(e) => setProductForm({...productForm, width: parseInt(e.target.value) || 0})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="0"
                   />
                 </div>
                 <div>
@@ -722,6 +490,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.height}
                     onChange={(e) => setProductForm({...productForm, height: parseInt(e.target.value) || 0})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="0"
                   />
                 </div>
               </div>
@@ -746,6 +515,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.seoTitle}
                     onChange={(e) => setProductForm({...productForm, seoTitle: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="SEO optimized title"
                   />
                 </div>
                 <div>
@@ -755,6 +525,7 @@ const PlatformAdmin: React.FC = () => {
                     value={productForm.tags}
                     onChange={(e) => setProductForm({...productForm, tags: e.target.value})}
                     className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                    placeholder="tag1, tag2, tag3"
                   />
                 </div>
               </div>
@@ -765,6 +536,7 @@ const PlatformAdmin: React.FC = () => {
                   value={productForm.seoDescription}
                   onChange={(e) => setProductForm({...productForm, seoDescription: e.target.value})}
                   className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+                  placeholder="SEO meta description"
                   rows={2}
                 />
               </div>

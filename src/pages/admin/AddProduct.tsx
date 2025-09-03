@@ -5,7 +5,7 @@ import { categories } from '../../data/mockData';
 import { Product } from '../../types';
 
 const AddProduct: React.FC = () => {
-  const { addProduct, stores } = useApp();
+  const { addProduct } = useApp();
   const [productImages, setProductImages] = useState<string[]>(['']);
   const [showSuccess, setShowSuccess] = useState(false);
   
@@ -131,36 +131,19 @@ const AddProduct: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Store</label>
-              <select
-                value={productForm.storeId}
-                onChange={(e) => setProductForm({...productForm, storeId: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                required
-              >
-                <option value="">Select Store</option>
-                <option value="tiny-treasure">Tiny Treasure (Main Store)</option>
-                {stores.map(store => (
-                  <option key={store.id} value={store.id}>{store.name}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
-              <select
-                value={productForm.category}
-                onChange={(e) => setProductForm({...productForm, category: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
-                required
-              >
-                <option value="">Select Category</option>
-                {categories.map(cat => (
-                  <option key={cat.id} value={cat.name}>{cat.icon} {cat.name}</option>
-                ))}
-              </select>
-            </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
+            <select
+              value={productForm.category}
+              onChange={(e) => setProductForm({...productForm, category: e.target.value})}
+              className="w-full px-4 py-3 border border-gray-300/50 dark:border-gray-600/50 rounded-xl focus:ring-2 focus:ring-teal-500/50 focus:border-transparent bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm text-gray-900 dark:text-white transition-all duration-300"
+              required
+            >
+              <option value="">Select Category</option>
+              {categories.map(cat => (
+                <option key={cat.id} value={cat.name}>{cat.icon} {cat.name}</option>
+              ))}
+            </select>
           </div>
 
           <div>

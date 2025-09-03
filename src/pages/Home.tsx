@@ -146,10 +146,11 @@ const Home: React.FC = () => {
           className="w-full h-full object-cover"
           autoPlay
           loop
-          muted={isMuted}
+          muted
           playsInline
+          onLoadedData={() => setIsVideoPlaying(true)}
         >
-          <source src="/hero-video.mp4.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         
         {/* Video Overlay */}
