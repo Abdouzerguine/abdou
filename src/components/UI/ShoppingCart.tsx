@@ -80,7 +80,7 @@ const ShoppingCart: React.FC = () => {
                         {item.product.name}
                       </h3>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                        {item.store.name}
+                        {item.store?.name || 'Tiny Treasure'}
                       </p>
                       {item.selectedVariant && (
                         <p className="text-xs text-teal-600 dark:text-teal-400 mt-1">
