@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Save, Package, Image, Plus, X, ArrowLeft, Upload, Eye, ExternalLink } from 'lucide-react';
 import { useApp } from '../../contexts/AppContext';
-import { categories } from '../../data/mockData';
+import { categories, algerianStates } from '../../data/mockData';
 import { Product } from '../../types';
 
 const AddProduct: React.FC = () => {
@@ -9,6 +9,8 @@ const AddProduct: React.FC = () => {
   const [productImages, setProductImages] = useState<string[]>(['']);
   const [showSuccess, setShowSuccess] = useState(false);
   const [createdProductId, setCreatedProductId] = useState<string | null>(null);
+  const [shippingRates, setShippingRates] = useState<{ [state: string]: number }>({});
+  const [activeShippingTab, setActiveShippingTab] = useState<'free' | 'rates'>('free');
   
   const [productForm, setProductForm] = useState({
     storeId: 'tiny-treasure',
@@ -83,6 +85,8 @@ const AddProduct: React.FC = () => {
       tags: ''
     });
     setProductImages(['']);
+    setShippingRates({});
+    setActiveShippingTab('free');
     
     setShowSuccess(true);
     setTimeout(() => setShowSuccess(false), 3000);
@@ -112,6 +116,22 @@ const AddProduct: React.FC = () => {
       updateImageField(index, result);
     };
     reader.readAsDataURL(file);
+  };
+
+  const updateShippingRate = (stateName: string, rate: number) => {
+    setShippingRates(prev => ({
+      ...prev,
+      [stateName]: rate
+    }));
+  };
+
+  const setZoneRates = (zone: string, rate: number) => {
+    const statesInZone = algerianStates.filter(state => state.zone === zone);
+    const newRates = { ...shippingRates };
+    statesInZone.forEach(state => {
+      newRates[state.name] = rate;
+    });
+    setShippingRates(newRates);
   };
 
   const copyProductLink = () => {
