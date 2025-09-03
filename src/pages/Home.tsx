@@ -336,11 +336,11 @@ const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="transform transition-all duration-300 hover:scale-110">
-              <div className="text-4xl md:text-5xl font-bold mb-2">{products.filter(p => p.isActive).length}+</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2">Coming Soon</div>
               <div className="text-teal-100 dark:text-teal-200">
                 {currentLanguage === 'ar' ? 'منتج متاح' : 
                  currentLanguage === 'fr' ? 'Produits Disponibles' : 
-                 'Products Available'}
+                 'Products'}
               </div>
             </div>
             <div className="transform transition-all duration-300 hover:scale-110">
