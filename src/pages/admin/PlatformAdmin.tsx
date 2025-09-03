@@ -59,6 +59,62 @@ const PlatformAdmin: React.FC = () => {
   });
 
 
+  const getTranslatedText = (key: string) => {
+    const translations = {
+      'product_management': {
+        en: 'Product Management',
+        ar: 'إدارة المنتجات',
+        fr: 'Gestion des Produits'
+      },
+      'manage_store_products': {
+        en: 'Manage your store products',
+        ar: 'إدارة منتجات متجرك',
+        fr: 'Gérer les produits de votre magasin'
+      },
+      'add_product': {
+        en: 'Add Product',
+        ar: 'إضافة منتج',
+        fr: 'Ajouter Produit'
+      },
+      'edit': {
+        en: 'Edit',
+        ar: 'تعديل',
+        fr: 'Modifier'
+      },
+      'delete': {
+        en: 'Delete',
+        ar: 'حذف',
+        fr: 'Supprimer'
+      },
+      'view_page': {
+        en: 'View Page',
+        ar: 'عرض الصفحة',
+        fr: 'Voir la Page'
+      },
+      'product_link_copied': {
+        en: 'Product link copied! Share it on social media.',
+        ar: 'تم نسخ رابط المنتج! شاركه على وسائل التواصل الاجتماعي.',
+        fr: 'Lien du produit copié! Partagez-le sur les réseaux sociaux.'
+      },
+      'no_products_yet': {
+        en: 'No products yet',
+        ar: 'لا توجد منتجات بعد',
+        fr: 'Aucun produit pour le moment'
+      },
+      'add_first_product': {
+        en: 'Start by adding your first product to the store',
+        ar: 'ابدأ بإضافة منتجك الأول إلى المتجر',
+        fr: 'Commencez par ajouter votre premier produit au magasin'
+      },
+      'add_first_product_button': {
+        en: 'Add Your First Product',
+        ar: 'أضف منتجك الأول',
+        fr: 'Ajouter Votre Premier Produit'
+      }
+    };
+    return translations[key]?.[currentLanguage] || key;
+  };
+
   const handleProductSubmit = (e: React.FormEvent) => {
     e.preventDefault();
   const productData: Product = {
