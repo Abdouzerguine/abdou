@@ -86,6 +86,7 @@ const AddProduct: React.FC = () => {
     });
     setProductImages(['']);
     setShippingRates({});
+    setSelectedDeliveryCompany('');
     setActiveShippingTab('free');
     
     setShowSuccess(true);
