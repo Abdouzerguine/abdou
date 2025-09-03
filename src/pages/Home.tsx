@@ -144,17 +144,12 @@ const Home: React.FC = () => {
         <video
           ref={setVideoRef}
           className="w-full h-full object-cover"
+          autoPlay
           loop
           muted={isMuted}
           playsInline
-          onLoadedData={() => {
-            if (videoRef) {
-              videoRef.play();
-              setIsVideoPlaying(true);
-            }
-          }}
         >
-          <source src="/hero-video.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4.mp4" type="video/mp4" />
         </video>
         
         {/* Video Overlay */}
@@ -190,20 +185,6 @@ const Home: React.FC = () => {
         </div>
 
         {/* Video Controls */}
-        <div className="absolute bottom-8 right-8 z-30 flex space-x-3">
-          <button
-            onClick={toggleVideo}
-            className="p-3 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            {isVideoPlaying ? <Pause className="h-6 w-6 text-white" /> : <Play className="h-6 w-6 text-white" />}
-          </button>
-          <button
-            onClick={toggleMute}
-            className="p-3 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full transition-all duration-300 backdrop-blur-sm"
-          >
-            {isMuted ? <VolumeX className="h-6 w-6 text-white" /> : <Volume2 className="h-6 w-6 text-white" />}
-          </button>
-        </div>
       </section>
 
       {/* Why Choose Us Section */}

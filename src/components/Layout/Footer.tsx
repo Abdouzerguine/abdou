@@ -19,9 +19,9 @@ const Footer: React.FC = () => {
   const getTranslatedText = (key: string) => {
     const translations = {
       'about_description': {
-        en: "Algeria's premier multi-vendor marketplace connecting local businesses with customers across all 58 states.",
-        ar: 'السوق الرائد متعدد البائعين في الجزائر الذي يربط الشركات المحلية بالعملاء في جميع الولايات الـ 58.',
-        fr: 'Le marché multi-vendeurs de premier plan en Algérie qui connecte les entreprises locales avec les clients dans les 58 wilayas.'
+        en: "Your trusted online store since May 2025, offering quality products with fast delivery across all 58 wilayas in Algeria.",
+        ar: 'متجرك الإلكتروني الموثوق منذ مايو 2025، يقدم منتجات عالية الجودة مع توصيل سريع في جميع الولايات الـ 58 في الجزائر.',
+        fr: 'Votre boutique en ligne de confiance depuis mai 2025, offrant des produits de qualité avec livraison rapide dans les 58 wilayas d\'Algérie.'
       },
       'quick_links': {
         en: 'Quick Links',
