@@ -1,1 +1,0 @@
-// StoreCard component removed for single store setup

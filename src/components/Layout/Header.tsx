@@ -95,40 +95,6 @@ const Header: React.FC = () => {
 
           {/* Navigation with 3D effects */}
           <nav className="hidden md:flex items-center space-x-6">
-            {/* Stores Dropdown */}
-            <div 
-              className="relative group"
-              onMouseEnter={() => setIsStoresMenuOpen(true)}
-              onMouseLeave={() => setIsStoresMenuOpen(false)}
-            >
-              <Link 
-                to="/stores" 
-                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-all duration-300 transform hover:scale-105 hover:drop-shadow-lg"
-              >
-                <span>{getTranslatedText('stores')}</span>
-                <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
-              </Link>
-              {isStoresMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20 dark:border-gray-700/20 py-2 z-50 transform transition-all duration-300 animate-in slide-in-from-top-2">
-                  <div className="px-4 py-2 border-b dark:border-gray-700/50">
-                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Browse Stores</h3>
-                  </div>
-                  <Link to="/stores" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all duration-200 hover:translate-x-1">
-                    All Stores
-                  </Link>
-                  <Link to="/stores?category=electronics" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all duration-200 hover:translate-x-1">
-                    📱 Electronics Stores
-                  </Link>
-                  <Link to="/stores?category=clothing" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all duration-200 hover:translate-x-1">
-                    👕 Fashion Stores
-                  </Link>
-                  <Link to="/stores?category=cosmetics" className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-all duration-200 hover:translate-x-1">
-                    💄 Beauty Stores
-                  </Link>
-                </div>
-              )}
-            </div>
-
             {/* Categories Dropdown */}
             <div 
               className="relative group"
@@ -257,9 +223,6 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden pb-4 transform transition-all duration-300 animate-in slide-in-from-top-2">
             <div className="flex flex-col space-y-4 bg-white/50 dark:bg-gray-800/50 backdrop-blur-xl rounded-xl p-4 border border-white/20 dark:border-gray-700/20">
-              <Link to="/stores" className="text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-all duration-200 hover:translate-x-2">
-                {getTranslatedText('stores')}
-              </Link>
               <Link to="/categories" className="text-gray-700 dark:text-gray-300 hover:text-teal-600 dark:hover:text-teal-400 font-medium transition-all duration-200 hover:translate-x-2">
                 {getTranslatedText('categories')}
               </Link>

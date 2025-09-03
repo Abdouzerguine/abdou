@@ -157,14 +157,6 @@ const Footer: React.FC = () => {
             <ul className="space-y-2">
               <li>
                 <Link 
-                  to="/stores" 
-                  className="text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-all duration-300 hover:translate-x-2 hover:drop-shadow-lg block"
-                >
-                  {getTranslatedText('all_stores')}
-                </Link>
-              </li>
-              <li>
-                <Link 
                   to="/categories" 
                   className="text-gray-300 dark:text-gray-400 hover:text-teal-400 dark:hover:text-teal-300 transition-all duration-300 hover:translate-x-2 hover:drop-shadow-lg block"
                 >

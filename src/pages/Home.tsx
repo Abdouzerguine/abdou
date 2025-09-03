@@ -290,87 +290,10 @@ const Home: React.FC = () => {
               to="/categories"
               className="hidden md:flex items-center space-x-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors"
             >
-              <span>{getTranslatedText('view_all')}</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {categories.slice(0, 8).map((category) => (
-              <Link
-                key={category.id}
-                to={`/categories?category=${category.name.toLowerCase()}`}
-                className="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2"
-              >
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-teal-100 to-blue-100 dark:from-teal-900 dark:to-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:from-teal-200 group-hover:to-blue-200 dark:group-hover:from-teal-800 dark:group-hover:to-blue-800 transition-all duration-300">
-                    <span className="text-3xl">{category.icon}</span>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-                    {category.name}
-                  </h3>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 md:hidden">
-            <Link
-              to="/categories"
-              className="inline-flex items-center space-x-2 bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition-colors"
-            >
-              <span>{getTranslatedText('view_all')}</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products Section */}
-      <section className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                {featuredProductsText}
-              </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-400">
-                {currentLanguage === 'ar' ? 'اكتشف أفضل منتجاتنا المختارة بعناية' : 
-                 currentLanguage === 'fr' ? 'Découvrez nos meilleurs produits soigneusement sélectionnés' : 
-                 'Discover our best carefully selected products'}
-              </p>
-            </div>
-            <Link
-              to="/categories"
-              className="hidden md:flex items-center space-x-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors"
-            >
-              <span>{getTranslatedText('view_all')}</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              to="/categories"
-              className="inline-flex items-center space-x-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white px-8 py-4 rounded-xl hover:from-teal-700 hover:to-blue-700 transition-all duration-300 font-medium shadow-lg transform hover:scale-105"
-            >
-              <span>{getTranslatedText('view_all')}</span>
-              <ArrowRight className="h-6 w-6" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-700 dark:to-blue-700 text-white">
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-blue-600 dark:from-teal-700 dark:to-blue-700 text-white bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="transform transition-all duration-300 hover:scale-110">
               <div className="text-4xl md:text-5xl font-bold mb-2">{products.filter(p => p.isActive).length}+</div>
               <div className="text-teal-100 dark:text-teal-200">
@@ -393,14 +316,6 @@ const Home: React.FC = () => {
                 {currentLanguage === 'ar' ? 'ولاية مغطاة' : 
                  currentLanguage === 'fr' ? 'Wilayas Couvertes' : 
                  'Wilayas Covered'}
-              </div>
-            </div>
-            <div className="transform transition-all duration-300 hover:scale-110">
-              <div className="text-4xl md:text-5xl font-bold mb-2">24/7</div>
-              <div className="text-teal-100 dark:text-teal-200">
-                {currentLanguage === 'ar' ? 'دعم العملاء' : 
-                 currentLanguage === 'fr' ? 'Support Client' : 
-                 'Customer Support'}
               </div>
             </div>
           </div>

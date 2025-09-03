@@ -16,7 +16,7 @@ const AboutUs: React.FC = () => {
           </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-6">About Tiny Treasure</h1>
           <p className="text-xl md:text-2xl text-teal-100 dark:text-teal-200 max-w-3xl mx-auto">
-            Empowering Algerian businesses and connecting communities through innovative e-commerce solutions
+            Your trusted online store providing quality products with exceptional service since May 2025
           </p>
         </div>
       </section>
@@ -29,38 +29,38 @@ const AboutUs: React.FC = () => {
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Our Story</h2>
               <div className="space-y-4 text-gray-600 dark:text-gray-400">
                 <p>
-                  Founded in 2024, Tiny Treasure emerged from a simple yet powerful vision: to create a digital marketplace 
-                  that truly serves the Algerian business community. We recognized that local entrepreneurs needed a platform 
-                  that understood their unique challenges and celebrated their diverse offerings.
+                  Founded in May 2025, Tiny Treasure started with a simple yet powerful vision: to provide Algerian customers 
+                  with access to quality products through a reliable and user-friendly online shopping experience. We recognized 
+                  the need for a trustworthy e-commerce platform that understands local preferences and delivery challenges.
                 </p>
                 <p>
-                  Starting as a small team of passionate developers and business enthusiasts, we've grown into Algeria's 
-                  premier multi-vendor marketplace, connecting businesses from all 58 wilayas with customers nationwide. 
-                  Our platform has become a bridge between traditional commerce and digital innovation.
+                  Starting as a dedicated team focused on customer satisfaction, we've built a comprehensive online store 
+                  that serves customers across all 58 wilayas in Algeria. Our platform combines the convenience of online 
+                  shopping with the reliability of traditional customer service.
                 </p>
                 <p>
-                  Today, we're proud to support hundreds of local businesses, from traditional craftsmen to modern tech 
-                  entrepreneurs, helping them reach new markets and grow their customer base across Algeria and beyond.
+                  Today, we're proud to offer a carefully curated selection of products across multiple categories, 
+                  ensuring quality, competitive pricing, and reliable delivery to every corner of Algeria.
                 </p>
               </div>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
               <div className="grid grid-cols-2 gap-6 text-center">
                 <div>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">500+</div>
-                  <div className="text-gray-600 dark:text-gray-400">Active Stores</div>
+                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">{products.filter(p => p.isActive).length}+</div>
+                  <div className="text-gray-600 dark:text-gray-400">Products Available</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">10K+</div>
-                  <div className="text-gray-600 dark:text-gray-400">Products Listed</div>
+                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">{categories.length}</div>
+                  <div className="text-gray-600 dark:text-gray-400">Product Categories</div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">58</div>
                   <div className="text-gray-600 dark:text-gray-400">Wilayas Covered</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">24/7</div>
-                  <div className="text-gray-600 dark:text-gray-400">Customer Support</div>
+                  <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">May 2025</div>
+                  <div className="text-gray-600 dark:text-gray-400">Since Founded</div>
                 </div>
               </div>
             </div>
@@ -85,7 +85,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Our Mission</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                To empower Algerian businesses with cutting-edge e-commerce tools and connect them with customers nationwide
+                To provide Algerian customers with access to quality products through reliable online shopping and exceptional customer service
               </p>
             </div>
 
@@ -95,7 +95,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Community First</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We prioritize the success of our business community, providing support and resources for sustainable growth
+                We prioritize our customers' satisfaction, providing quality products and reliable service for a great shopping experience
               </p>
             </div>
 
@@ -105,7 +105,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Authenticity</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We celebrate the unique character of Algerian businesses and promote authentic, quality products
+                We offer authentic, quality products that meet the needs and preferences of Algerian customers
               </p>
             </div>
 
@@ -115,7 +115,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Excellence</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We strive for excellence in every aspect of our platform, from user experience to customer service
+                We strive for excellence in every aspect of our service, from product quality to customer support
               </p>
             </div>
           </div>
@@ -140,7 +140,7 @@ const AboutUs: React.FC = () => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Our Location</h3>
               <p className="text-gray-600 dark:text-gray-400">
                 Algiers, Algeria<br />
-                Serving all 58 wilayas
+                Delivering to all 58 wilayas
               </p>
             </div>
 
