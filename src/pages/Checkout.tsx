@@ -5,7 +5,7 @@ import { useCart } from '../contexts/CartContext';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useApp } from '../contexts/AppContext';
 import { algerianStates } from '../data/mockData';
-import { Order, OrderItem } from '../types';
+import { Order, OrderItem, Store } from '../types';
 
 // TikTok Icon Component
 const TikTokIcon: React.FC<{ className?: string }> = ({ className = "h-5 w-5" }) => (
@@ -240,21 +240,32 @@ const Checkout: React.FC = () => {
 
     // Group items by store
     const storeGroups = items.reduce((groups, item) => {
-      const storeId = item.product.storeId || 'default-store';
+      const storeId = item.product.storeId || 'tiny-treasure';
       const store = stores.find(s => s.id === storeId) || { 
-        id: storeId, 
+        id: 'tiny-treasure', 
         name: 'Tiny Treasure', 
+        category: 'General',
         description: '', 
         logo: '', 
-        contactInfo: { phone: '', email: '', address: '' } 
+        adminEmail: 'tiny05treasure@gmail.com',
+        colorScheme: '#0d9488',
+        contactInfo: { phone: '0781604556', email: 'tiny05treasure@gmail.com', address: 'Algiers, Algeria' },
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        currency: 'DZD' as const,
+        settings: {
+          autoInventoryTracking: true,
+          emailNotifications: true,
+          seoOptimized: true
+        }
       };
       
       if (!groups[storeId]) {
-        groups[storeId] = { store, items: [] };
+        groups[storeId] = { store, items: [] as typeof items };
       }
       groups[storeId].items.push(item);
       return groups;
-    }, {} as Record<string, { store: any; items: any[] }>);
+    }, {} as Record<string, { store: Store; items: typeof items }>);
 
     // Create separate orders for each store
     Object.values(storeGroups).forEach(group => {
