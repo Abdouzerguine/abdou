@@ -404,6 +404,47 @@ const Home: React.FC = () => {
               {getTranslatedText('subscribe')}
             </button>
           </div>
+          
+          <div className="mt-12 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-xl p-8">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              {currentLanguage === 'ar' ? 'رحلتي في التجارة الإلكترونية' : 
+               currentLanguage === 'fr' ? 'Mon Parcours E-commerce' : 
+               'My E-commerce Journey'}
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              {currentLanguage === 'ar' ? 
+                'بدأت Tiny Treasure في مايو 2025 كمتجر إلكتروني شخصي لتقديم منتجات عالية الجودة للعملاء في جميع أنحاء الجزائر. هدفي هو بناء علاقات طويلة الأمد مع العملاء من خلال الخدمة الممتازة والمنتجات الموثوقة.' : 
+               currentLanguage === 'fr' ? 
+                'Tiny Treasure a commencé en mai 2025 comme ma boutique en ligne personnelle pour offrir des produits de qualité aux clients à travers l\'Algérie. Mon objectif est de construire des relations durables avec les clients grâce à un excellent service et des produits fiables.' : 
+                'Tiny Treasure started in May 2025 as my personal online store to provide quality products to customers across Algeria. My goal is to build lasting relationships with customers through excellent service and reliable products.'}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-2xl font-bold text-teal-600 dark:text-teal-400 mb-2">May 2025</div>
+                <div className="text-gray-600 dark:text-gray-400">
+                  {currentLanguage === 'ar' ? 'تاريخ التأسيس' : 
+                   currentLanguage === 'fr' ? 'Date de Fondation' : 
+                   'Founded'}
+                </div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-teal-600 dark:text-teal-400 mb-2">100%</div>
+                <div className="text-gray-600 dark:text-gray-400">
+                  {currentLanguage === 'ar' ? 'رضا العملاء' : 
+                   currentLanguage === 'fr' ? 'Satisfaction Client' : 
+                   'Customer Satisfaction'}
+                </div>
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-teal-600 dark:text-teal-400 mb-2">24/7</div>
+                <div className="text-gray-600 dark:text-gray-400">
+                  {currentLanguage === 'ar' ? 'دعم العملاء' : 
+                   currentLanguage === 'fr' ? 'Support Client' : 
+                   'Customer Support'}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

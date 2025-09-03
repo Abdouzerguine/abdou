@@ -1,7 +1,11 @@
 import React from 'react';
 import { Users, Target, Heart, Award, MapPin, Mail, Phone } from 'lucide-react';
+import { useApp } from '../contexts/AppContext';
+import { categories } from '../data/mockData';
 
 const AboutUs: React.FC = () => {
+  const { products } = useApp();
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       {/* Hero Section */}
@@ -30,16 +34,16 @@ const AboutUs: React.FC = () => {
               <div className="space-y-4 text-gray-600 dark:text-gray-400">
                 <p>
                   Founded in May 2025, Tiny Treasure started with a simple yet powerful vision: to provide Algerian customers 
-                  with access to quality products through a reliable and user-friendly online shopping experience. We recognized 
-                  the need for a trustworthy e-commerce platform that understands local preferences and delivery challenges.
+                  with access to quality products through a reliable and user-friendly online shopping experience. I recognized 
+                  the need for a trustworthy online store that understands local preferences and delivery challenges.
                 </p>
                 <p>
-                  Starting as a dedicated team focused on customer satisfaction, we've built a comprehensive online store 
-                  that serves customers across all 58 wilayas in Algeria. Our platform combines the convenience of online 
+                  Starting as a dedicated business focused on customer satisfaction, I've built a comprehensive online store 
+                  that serves customers across all 58 wilayas in Algeria. My store combines the convenience of online 
                   shopping with the reliability of traditional customer service.
                 </p>
                 <p>
-                  Today, we're proud to offer a carefully curated selection of products across multiple categories, 
+                  Today, I'm proud to offer a carefully curated selection of products across multiple categories, 
                   ensuring quality, competitive pricing, and reliable delivery to every corner of Algeria.
                 </p>
               </div>
@@ -60,7 +64,7 @@ const AboutUs: React.FC = () => {
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-teal-600 dark:text-teal-400 mb-2">May 2025</div>
-                  <div className="text-gray-600 dark:text-gray-400">Since Founded</div>
+                  <div className="text-gray-600 dark:text-gray-400">Store Founded</div>
                 </div>
               </div>
             </div>
@@ -85,7 +89,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Our Mission</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                To provide Algerian customers with access to quality products through reliable online shopping and exceptional customer service
+                To provide Algerian customers with access to quality products through my reliable online store and exceptional customer service
               </p>
             </div>
 
@@ -95,7 +99,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Community First</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We prioritize our customers' satisfaction, providing quality products and reliable service for a great shopping experience
+                I prioritize my customers' satisfaction, providing quality products and reliable service for a great shopping experience
               </p>
             </div>
 
@@ -105,7 +109,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Authenticity</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We offer authentic, quality products that meet the needs and preferences of Algerian customers
+                I offer authentic, quality products that meet the needs and preferences of Algerian customers
               </p>
             </div>
 
@@ -115,7 +119,7 @@ const AboutUs: React.FC = () => {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Excellence</h3>
               <p className="text-gray-600 dark:text-gray-400">
-                We strive for excellence in every aspect of our service, from product quality to customer support
+                I strive for excellence in every aspect of my service, from product quality to customer support
               </p>
             </div>
           </div>
@@ -128,7 +132,7 @@ const AboutUs: React.FC = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Get in Touch</h2>
             <p className="text-xl text-gray-600 dark:text-gray-400">
-              We'd love to hear from you. Reach out to us anytime!
+              I'd love to hear from you. Reach out to me anytime!
             </p>
           </div>
 
