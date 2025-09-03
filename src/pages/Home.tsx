@@ -62,9 +62,9 @@ const Home: React.FC = () => {
         fr: 'Acheter Maintenant'
       },
       'why_choose_us': {
-        en: 'Why Choose Tiny Treasure?',
-        ar: 'لماذا تختار الكنز الصغير؟',
-        fr: 'Pourquoi Choisir Tiny Treasure?'
+        en: 'Why Shop With Us?',
+        ar: 'لماذا تتسوق معنا؟',
+        fr: 'Pourquoi Acheter Chez Nous?'
       },
       'quality_products': {
         en: 'Quality Products',
@@ -154,7 +154,7 @@ const Home: React.FC = () => {
             }
           }}
         >
-          <source src="/hero-video.mp4.mp4" type="video/mp4" />
+          <source src="/hero-video.mp4" type="video/mp4" />
         </video>
         
         {/* Video Overlay */}
@@ -293,6 +293,59 @@ const Home: React.FC = () => {
               <span>{getTranslatedText('view_all')}</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {categories.slice(0, 8).map((category) => (
+              <Link
+                key={category.id}
+                to={`/categories/${category.id}`}
+                className="group bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Package className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {category.name[currentLanguage]}
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {products.filter(p => p.categoryId === category.id && p.isActive).length} products
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Products Section */}
+      <section className="py-20 bg-white dark:bg-gray-800 transition-colors duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center mb-12">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                {featuredProductsText}
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400">
+                {currentLanguage === 'ar' ? 'اكتشف أفضل منتجاتنا المختارة بعناية' : 
+                 currentLanguage === 'fr' ? 'Découvrez nos meilleurs produits soigneusement sélectionnés' : 
+                 'Discover our best handpicked products'}
+              </p>
+            </div>
+            <Link
+              to="/categories"
+              className="hidden md:flex items-center space-x-2 text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 font-medium transition-colors"
+            >
+              <span>{getTranslatedText('view_all')}</span>
+              <ArrowRight className="h-5 w-5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
         </div>
       </section>
